@@ -3,7 +3,7 @@
 
 scope: {{ patroni_cluster_name }}
 name: {{ ansible_hostname }}
-namespace: /service/
+namespace:{{ patroni_cluster_name }}
 
 {% if patroni_log_destination == 'logfile' %}
 log:
