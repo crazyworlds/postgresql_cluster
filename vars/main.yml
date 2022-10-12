@@ -66,6 +66,9 @@ patroni_etcd_hosts: []
 #  - { host: "10.128.64.142", port: "2379" }
 #  - { host: "10.128.64.143", port: "2379" }
 
+patroni_etcd_username: "patroni"
+patroni_etcd_password: "patronipass
+
 # more options you can specify in the roles/patroni/templates/patroni.yml.j2
 # https://patroni.readthedocs.io/en/latest/SETTINGS.html#etcd
 # https://patroni.readthedocs.io/en/latest/SETTINGS.html#consul
