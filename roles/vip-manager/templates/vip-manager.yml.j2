@@ -15,7 +15,9 @@ interface: {{ vip_manager_iface }} # interface to which the virtual ip will be a
 # how the virtual ip should be managed. we currently support "ip addr add/remove" through shell commands or the Hetzner api
 hosting-type: basic # possible values: basic, or hetzner.
 
-dcs-type: etcd # etcd or consul
+{% if not dcs_type == 'etcd3' %}
+dcs-type: {{ dcs_type }} # etcd or consul
+{% endif %}
 # a list that contains all DCS endpoints to which vip-manager could talk.
 {% if not dcs_exists|bool and dcs_type == 'etcd' %}
 dcs-endpoints:
@@ -33,6 +35,7 @@ dcs-endpoints:
   # consul will always only use the first entry from this list.
   # For consul, you'll obviously need to change the port to 8500.
 {% if dcs_exists|bool and dcs_type == 'etcd3' %}
+dcs-type: etcd # etcd or consul
 dcs-endpoints:
 {% for etcd_hosts in patroni_etcd_hosts %}
   - http://{{ etcd_hosts.host }}:{{ etcd_hosts.port }}
