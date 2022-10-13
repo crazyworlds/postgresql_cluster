@@ -31,17 +31,20 @@ restapi:
 
 {% if not dcs_exists|bool and dcs_type == 'etcd' %}
 etcd:
-  hosts: {% for host in groups['etcd_cluster'] %}{{ hostvars[host]['inventory_hostname'] }}:2379{% if not loop.last %},{% endif %}{% endfor %}
+  hosts: {% for host in groups['etcd_cluster'] %}{{ hostvars[host]['inventory_hostname'] }}:2379{% if not loop.last %},{% endif %}
+  {% endfor %}
 {% endif %}
 {% if dcs_exists|bool and dcs_type == 'etcd' %}
 etcd:
-  hosts: {% for etcd_hosts in patroni_etcd_hosts %}{{etcd_hosts.host}}:{{etcd_hosts.port}}{% if not loop.last %},{% endif %}{% endfor %}
+  hosts: {% for etcd_hosts in patroni_etcd_hosts %}{{etcd_hosts.host}}:{{etcd_hosts.port}}{% if not loop.last %},{% endif %}
+  {% endfor %}
   username: {{ patroni_etcd_username }}
   password: {{ patroni_etcd_password }}
 {% endif %}
 {% if dcs_exists|bool and dcs_type == 'etcd3' %}
 etcd3:
-  hosts: {% for etcd_hosts in patroni_etcd_hosts %}{{etcd_hosts.host}}:{{etcd_hosts.port}}{% if not loop.last %},{% endif %}{% endfor %}
+  hosts: {% for etcd_hosts in patroni_etcd_hosts %}{{etcd_hosts.host}}:{{etcd_hosts.port}}{% if not loop.last %},{% endif %}
+  {% endfor %}
   username: {{ patroni_etcd_username }}
   password: {{ patroni_etcd_password }}
 {% endif %}
