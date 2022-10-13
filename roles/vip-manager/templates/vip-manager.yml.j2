@@ -33,6 +33,10 @@ dcs-endpoints:
   # consul will always only use the first entry from this list.
   # For consul, you'll obviously need to change the port to 8500.
 {% if dcs_exists|bool and dcs_type == 'etcd3' %}
+dcs-endpoints:
+{% for etcd_hosts in patroni_etcd_hosts %}
+  - http://{{ etcd_hosts.host }}:{{ etcd_hosts.port }}
+{% endfor %}
 
 etcd-user: {{ patroni_etcd_username }}
 etcd-password: {{ patroni_etcd_password }}
