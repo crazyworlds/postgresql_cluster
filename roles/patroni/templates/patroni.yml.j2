@@ -45,6 +45,7 @@ etcd:
 etcd3:
   hosts: {% for etcd_hosts in patroni_etcd_hosts %}{{etcd_hosts.host}}:{{etcd_hosts.port}}{% if not loop.last %},{% endif %}
   {% endfor %}
+  
   username: {{ patroni_etcd_username }}
   password: {{ patroni_etcd_password }}
 {% endif %}
