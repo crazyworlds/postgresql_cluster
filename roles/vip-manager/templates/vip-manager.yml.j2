@@ -4,7 +4,7 @@
 interval: {{ vip_manager_interval }}
 
 # the etcd or consul key which vip-manager will regularly poll.
-trigger-key: "/service/{{ patroni_cluster_name }}/leader"
+trigger-key: "/{{ patroni_cluster_name }}/{{ patroni_cluster_name }}/leader"
 # if the value of the above key matches the trigger-value (often the hostname of this host), vip-manager will try to add the virtual ip address to the interface specified in Iface
 trigger-value: "{{ ansible_hostname }}"
 
