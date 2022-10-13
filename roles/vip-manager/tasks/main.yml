@@ -99,7 +99,10 @@
       notify: "restart vip-manager"
   when: existing_pgcluster is defined and existing_pgcluster|bool
   tags: vip, vip_manager, vip_manager_conf
-
+- name: Copy vip-manager Binary
+  copy:
+    src: vip-manager
+    dest: /usr/bin/vip-manager
 - name: Generate systemd service file
   template:
     src: templates/vip-manager.service.j2
